@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .green{
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<p><a href="../index.html">返回</a></p>
+<p>react最新版本抛弃使用了createClass这个函数，这个也是为了配合ES6 </p>
+<div id="container"></div>
+<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script type="text/babel">
+    var HelloMessage = React.createClass({
+        getDefaultProps:function(){
+            return {a:0, b:0}
+        },
+        propTypes :{
+            a:PropTypes.number.isRequired,
+            b:PropTypes.number.isRequired,
+        },
+        render(){
+            return (<div>
+                <p>a = {this.props.a}</p>
+                <p>b = {this.props.b}</p>
+                <p>a + b = {this.props.a + this.props.b}</p>
+            </div>);
+        }
+    });
+
+
+    ReactDOM.render(
+        <HelloMessage a={1} b={2}/>,
+        document.getElementById('container')
+    );
+
+</script>
+</body>
+</html>

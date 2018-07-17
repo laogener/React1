@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href="../index.html">返回</a></p>
+<h1>State  2016</h1>
+<div id="container"></div>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+
+    class HelloMessage extends React.Component {
+        constructor(props){
+            super(props);
+            this.state = {
+                zan:0
+            }
+            this.addZan = this.addZan.bind(this);
+        }
+        addZan(){
+            this.setState({
+                zan:this.state.zan + 1
+            })
+        }
+        render(){
+            return (<div>
+                <p>姓名：{this.props.name}</p>
+                <p>赞：{this.state.zan}</p>
+                <p><button onClick={this.addZan.bind(this)}>赞</button></p>
+                <p><button onClick={this.addZan}>赞</button></p>
+            </div>);
+        }
+    }
+
+
+    ReactDOM.render(
+        <HelloMessage name='john'/>,
+        document.getElementById('container')
+    );
+
+</script>
+</body>
+</html>

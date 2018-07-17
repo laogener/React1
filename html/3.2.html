@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href="../index.html">返回</a></p>
+<h1>生命周期</h1>
+<p>react最新版本抛弃使用了createClass这个函数，这个也是为了配合ES6 </p>
+<div id="container"></div>
+<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script type="text/babel">
+    var HelloMessage = React.createClass({
+        getInitialState:function(){
+            return({
+                aaa:'请输入',
+                sex:0,
+                checkBoxOption:[
+                    {
+                        text:'c1',
+                        value:'1',
+                        checked:true,
+                    },
+                    {
+                        text:'c2',
+                        value:'2',
+                        checked:false,
+                    },
+                    {
+                        text:'c3',
+                        value:'3',
+                        checked:false,
+                    },
+                ],
+            })
+        },
+        bbb:function(e){
+            console.log(e.target.value);
+            this.setState({
+                aaa:e.target.value
+            })
+        },
+        render:function(){
+            return (<div>
+                <p>非约束性表单：<input type="text" defaultValue={this.state.aaa}/></p>
+                <p>约束性表单：<input type="text" defaultValue={this.state.aaa} onChange={this.bbb}/></p>
+                <p><input type="radio" name="sex" value="1" defaultChecked={this.state.sex == 0 ? true: false}/>男</p>
+                <p><input type="radio" name="sex" value="0" defaultChecked={this.state.sex == 1 ? true: false}/>女</p>
+                <p>
+                    {this.state.checkBoxOption.map(function (checkBoxOption, index) {
+                        return(
+                            <span>
+                                <input type="checkbox" name={checkBoxOption.text} value={checkBoxOption.value} defaultChecked={checkBoxOption.checked == true ? true: false}/>{checkBoxOption.text}
+                            </span>
+                        )
+                    })}
+                </p>
+            </div>)
+        },
+    });
+
+
+    ReactDOM.render(
+        <HelloMessage/>,
+        document.getElementById('container')
+    );
+
+</script>
+</body>
+</html>

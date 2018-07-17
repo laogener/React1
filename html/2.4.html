@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href="../index.html">返回</a></p>
+<h1>生命周期</h1>
+<p>react最新版本抛弃使用了createClass这个函数，这个也是为了配合ES6 </p>
+<div id="container"></div>
+<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script type="text/babel">
+    var likes = ['足球','篮球','排球','羽毛球','乒乓球'];
+    var HelloMessage = React.createClass({
+        getDefaultProps:function(){
+            console.log('1-getDefaultProps 设置默认的Props');
+            return {name:'john'}
+        },
+        getInitialState:function(){
+            console.log('2-getInitialState 设置状态机');
+            return ({
+                zan:0,
+                like:likes
+            })
+        },
+        addZan:function(){
+            this.setState({
+                zan:this.state.zan + 1
+            })
+        },
+        componentWillMount:function(){
+            console.log('3-componentWillMount 组件出现之前');
+        },
+        render:function(){
+            console.log('4-render 渲染');
+            return (
+                <div>
+                    <p>姓名：{this.props.name}</p>
+                    <p>赞：{this.state.zan}</p>
+                    <p><button onClick={this.addZan.bind(this)}>赞</button></p>
+                    <p><button onClick={this.addZan}>赞</button></p>
+                    <ul>
+                        {
+                            this.state.like.map(function (like, index) {
+
+                             return(
+                                 <ShowLi key = {index} name={like}/>
+                             )
+                            })
+                        }
+                    </ul>
+                </div>);
+        },
+        componentDidMount :function(){
+            console.log('5-componentDidMount  组件出现后');
+        },
+    });
+
+    var ShowLi = React.createClass({
+        render:function(){
+            console.log('子组件渲染完成');
+            return(
+                <li>{this.props.name}</li>
+            )
+        }
+    });
+
+    ReactDOM.render(
+        <HelloMessage/>,
+        document.getElementById('container'),
+        function () {
+            console.log('6 - 完成');
+        }
+    );
+
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href="../index.html">返回</a></p>
+<h1>生命周期</h1>
+<p>react最新版本抛弃使用了createClass这个函数，这个也是为了配合ES6 </p>
+<div id="container"></div>
+<script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script type="text/babel">
+    var mix = {
+      componentDidMount:function () {
+          console.log('加载正常');
+      }
+    };
+    var HelloMessage1 = React.createClass({
+        mixins:[mix],
+        render(){
+            return <div>Hello {this.props.name}</div>;
+        }
+    });
+    var HelloMessage2 = React.createClass({
+        mixins:[mix],
+        render(){
+            return <div>Hello {this.props.name}</div>;
+        }
+    });
+
+    ReactDOM.render(
+        <div>
+            <HelloMessage1 name='aaa'/>
+            <HelloMessage1 name='bbb'/>
+        </div>,
+        document.getElementById('container')
+    );
+
+</script>
+</body>
+</html>
